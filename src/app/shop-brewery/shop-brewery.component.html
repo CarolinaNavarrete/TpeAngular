@@ -1,0 +1,39 @@
+<table>
+    
+
+    <thead>
+        <tr>
+            <th>Cerveza</th>
+            <th>Tipo</th>
+            <th>Stock</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let cerveza of beers">
+        <td >{{cerveza.nombre}}</td>
+        <td>{{cerveza.tipo}}</td>
+        <td>
+    <ng-container *ngIf="cerveza.stock==0; else hayStock">
+         
+            <span>SIN STOCK</span>
+        </ng-container>
+        <ng-template #hayStock> <span>{{cerveza.stock}}</span>
+        </ng-template>
+                </td>
+        <td>
+          <div *ngIf="cerveza.stock>0">
+              <button class="btn btn-primary btn-sm" (click)="downQuantity()">-</button>
+              {{cerveza.quantity}}
+              <button class="btn btn-primary btn-sm" (click)="upQuantity()">+</button>
+              
+          </div>
+          
+      </td>
+    
+      </tr>
+    
+  
+  </table>
+  <app-resumen-compra [total]="total">
+</app-resumen-compra>
+<button type="button" class="btn btn-success" (click)="enviarResumen()">Comprar</button>
